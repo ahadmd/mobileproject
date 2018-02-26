@@ -1,5 +1,6 @@
 package com.ttech.mobileTesting;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -15,16 +16,20 @@ import io.appium.java_client.remote.MobilePlatform;
     public class MyFirstMobileTest {
     @Test
 	public  void test1() throws MalformedURLException {
+    	
+    	File f = new File("src");
+    	File fs = new File(f, "ApiDemos-debug.apk");
+    	
 	DesiredCapabilities cap= new DesiredCapabilities();  // this is Selenium package (DesiredCapabilities) class must create object
-	cap.setCapability(MobileCapabilityType.BROWSER_NAME, BrowserType.CHROME); // for browser open formula
-	//cap.setCapability(MobileCapabilityType.PLATFORM,Platform.ANDROID);
-	cap.setCapability(MobileCapabilityType.PLATFORM_NAME, MobilePlatform.ANDROID);
-	cap.setCapability(MobileCapabilityType.DEVICE_NAME, "Android device" );
-	cap.setCapability(MobileCapabilityType.VERSION, "5.1.1");
-	AndroidDriver<AndroidElement> driver= new AndroidDriver<AndroidElement>(new URL("http://localhost:4723/wd/hub "),cap); // appium connectivity host
-	driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
-	driver.get("https://www.facebook.com/");
-	driver.findElement(By.xpath("//*[@id=\"m_login_email\"]")).sendKeys("nurnaharbegumnyc@gmail.com");
-	driver.findElement(By.xpath("//*[@id=\"m_login_password\"]")).sendKeys("SAYEDawan2008");
-	driver.findElement(By.xpath("//*[@id=\"u_0_5\"]")).click();
-	}}//End class
+    cap.setCapability(MobileCapabilityType.DEVICE_NAME, "AhadEmulator");
+    
+    cap.setCapability(MobileCapabilityType.APP, fs.getAbsolutePath());
+    
+    AndroidDriver <AndroidElement> driver = new AndroidDriver<> ( new URL("http://127.0.0.1:4723/wd/hub"),cap);
+    
+    
+    
+    
+    
+    
+	}}
